@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -euxo pipefail
+strace -etrace=execve -f --string-limit 10000 -qq --output strace.$PPID.out "${@}" || true
+just filter-exec < strace.$PPID.out
+rm strace.$PPID.out
