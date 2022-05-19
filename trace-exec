@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
-strace -etrace=execve -f --string-limit 10000 -qq --output strace.$PPID.out "${@}" || true
+
+strace -etrace=execve -f --string-limit 0 -qq --output strace.$PPID.out "${@}" || true
 node filter-exec.js < strace.$PPID.out
 rm strace.$PPID.out
